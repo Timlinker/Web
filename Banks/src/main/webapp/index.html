@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Банки</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+    <link rel = "stylesheet" href = style.css>
+</head>
+<body>
+<div class="container">
+    <div class="golova">Импорт</div>
+    <div class="but">
+        <form method="POST" enctype="multipart/form-data" id="uploadForm">
+            <input type="file" name="file" id="fileInput" accept=".xml" style="display: none;" />
+            <button type="button" onclick="document.getElementById('fileInput').click();">Обзор</button>
+            <button type="submit">Загрузить</button>
+        </form>
+    </div>
+
+    <div class="block" th:if="${data}">
+        <table>
+        <thead>
+        <tr>
+            <th>Дата создания</th>
+            <th>Файл</th>
+            <th>Дата составления ЭС</th>
+            <th>ID составителя ЭС</th>
+            <th>ID получателя ЭС</th>
+            <th>Код причины создания</th>
+            <th>Дата создания ЭС</th>
+            <th>Вид представления информации</th>
+            <th>Дата ОД</th>
+            <th>Номер версии Справочника БИК</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${data}">
+            <td th:text = "${entry.CreationDateTime}"></td>
+            <td th:text = "${entry.EDDate}"></td>
+            <td th:text = "${entry.EDAuthor}"></td>
+            <td ></td>
+            <td th:text = "${entry.CreationReason}"></td>
+            <td th:text = "${entry.CreationDateTime}"></td>
+            <td th:text = "${entry.InfoTypeCode}"></td>
+            <td th:text = "${entry.BusinessDay}"></td>
+            <td th:text = "${entry.DirectoryVersion}"></td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+    <div class="block2">
+        <table>
+            <thead>
+            <tr>
+                <td>БИК</td>
+                <td>Информация об участнике (ID)</td>
+                <td>Наименование участника</td>
+                <td>Рег.порядковый номер</td>
+                <td>Код страны</td>
+                <td>Код территории</td>
+                <td>Индекс</td>
+                <td>Тип нас.пункта</td>
+                <td>Населённый пункт</td>
+                <td>Адрес</td>
+                <td>БИК голов.организации</td>
+                <td>Дата включения</td>
+                <td>Дата исключения</td>
+                <td>Тип участника</td>
+                <td>Доступные сервисы</td>
+                <td>Участник обмена</td>
+                <td>УИС</td>
+                <td>Статус участника</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each ="entry:${data}">
+                <td th:text = "${entry.bicDirectoryEntry.BIC}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.NameP}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.RegN"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.CntrCd}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Rgn}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Ind}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Tnp}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Nnp}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Adr}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.PrntBIC}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.DateIn}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.DateOut}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.PtType}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.Srvcs}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.XchType}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.UID}"></td>
+                <td th:text = "${entry.bicDirectoryEntry.participantInfo.ParticipantStatus}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>
